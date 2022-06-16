@@ -15,10 +15,11 @@ html {
 
 :root {
   --primary-color: #7e22ce;
+  --primary-dark-color: #581c87;
   --secondary-color: #f97316;
   --white-color: #fff;
   --title-color: #444;
-  --nav--bgColor: #f4f4f5;
+  --nav-bgColor: #f4f4f5;
   --success-color: #65a30d;
   --danger-color: #dc2626;
 }
@@ -35,6 +36,7 @@ html {
   border-radius: 0.5rem;
   font-size: 1.6rem;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .btn-primary {

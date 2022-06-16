@@ -1,27 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // Images
 import basket from "../../assets/images/basket.svg";
-import { BiPlus, BiMinus, BiPulse } from "react-icons/bi";
+import { BiPlus, BiMinus } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
 
 // Css
 import styles from "./Cart.module.css";
 import { getQuantity, shorten } from "../../helper/functions";
 import {
-  checkout,
   clear,
+  checkout,
   decrease,
   increase,
   removeFromCart,
 } from "../../redux/Cart/CartActions";
+import { CHECKOUT } from "../../actions";
 
 const Cart = () => {
   const state = useSelector((state) => state.cartState);
   const dispatch = useDispatch();
+  const [isCheckout, setIsCheckout] = useState(false);
+  const navigate = useNavigate();
 
   let numberOfAmounts = state.cart.reduce(
     (acc, curr) => acc + curr.quantity,
@@ -30,6 +33,29 @@ const Cart = () => {
   let total = state.cart
     .reduce((acc, curr) => acc + curr.quantity * curr.price, 0)
     .toFixed(2);
+
+  const handleCheckout = () => {
+    setIsCheckout(true);
+    dispatch(checkout());
+    setTimeout(() => {
+      navigate("/");
+      setIsCheckout(false);
+    }, 3000);
+  };
+
+  if (isCheckout) {
+    return (
+      <section className="container">
+        <div className={styles.checkout}>
+          <h3>Checkout Successfully</h3>
+          <p>You will be redirected to the home page in a few seconds</p>
+          <Link to="/" className="btn btn-primary">
+            Buy More
+          </Link>
+        </div>
+      </section>
+    );
+  }
 
   if (!state.cart.length) {
     return (
@@ -104,10 +130,7 @@ const Cart = () => {
             >
               Clear
             </button>
-            <button
-              className="btn btn-success"
-              onClick={() => dispatch(checkout())}
-            >
+            <button className="btn btn-success" onClick={handleCheckout}>
               Checkout
             </button>
           </div>

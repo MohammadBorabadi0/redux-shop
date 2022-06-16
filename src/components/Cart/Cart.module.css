@@ -12,6 +12,7 @@
   align-items: center;
   margin: 4rem 0;
   gap: 2rem;
+  min-height: calc(100vh - 21.6rem);
 }
 
 .checkout h3 {
@@ -29,6 +30,7 @@
   align-items: center;
   margin: 3rem 0;
   gap: 2rem;
+  min-height: calc(100vh - 19.6rem);
 }
 
 .cart__empty h2 {
@@ -44,6 +46,7 @@
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 3rem;
+  min-height: calc(100vh - 24.7rem);
 }
 
 .carts {
@@ -51,6 +54,7 @@
   grid-template-columns: repeat(1, 1fr);
   gap: 2rem;
   flex: 3;
+  height: fit-content;
 }
 
 .cart {

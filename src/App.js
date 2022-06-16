@@ -11,6 +11,7 @@ import ProductList from "./components/ProductList/ProductList";
 import Navbar from "./components/Navbar/Navbar";
 import Cart from "./components/Cart/Cart";
 import ProductDetail from "./components/ProductDetail/ProductDetail";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="cart" element={<Cart />} />
         <Route path="/" element={<ProductList />} />
       </Routes>
+      <Footer />
     </Provider>
   );
 };

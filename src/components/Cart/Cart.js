@@ -38,8 +38,8 @@ const Cart = () => {
     setIsCheckout(true);
     dispatch(checkout());
     setTimeout(() => {
-      navigate("/");
-      setIsCheckout(false);
+      // navigate("/");
+      // setIsCheckout(false);
     }, 3000);
   };
 

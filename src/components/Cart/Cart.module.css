@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin: 3rem 0;
   gap: 2rem;
 }
 
@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .carts {
@@ -128,14 +129,14 @@
     width: 120px;
     height: 110px;
   }
-  .cart__body span{
+  .cart__body span {
     font-size: 1.6rem;
   }
   .cart__buttons button {
     font-size: 1.6rem;
     padding: 0.8rem;
   }
-  .cart__buttons span{
+  .cart__buttons span {
     font-size: 1.6rem;
   }
 }

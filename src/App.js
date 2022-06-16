@@ -10,13 +10,15 @@ import { Provider } from "react-redux";
 import ProductList from "./components/ProductList/ProductList";
 import Navbar from "./components/Navbar/Navbar";
 import Cart from "./components/Cart/Cart";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
 
 const App = () => {
   return (
     <Provider store={store}>
       <Navbar />
       <Routes>
-        <Route path="/cart" element={<Cart />} />
+        <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="cart" element={<Cart />} />
         <Route path="/" element={<ProductList />} />
       </Routes>
     </Provider>

@@ -20,6 +20,7 @@ html {
   --white-color: #fff;
   --title-color: #444;
   --nav-bgColor: #f4f4f5;
+  --header-color: #111;
   --success-color: #65a30d;
   --danger-color: #dc2626;
 }
@@ -29,14 +30,23 @@ html {
   margin: auto;
 }
 
+@media (max-width: 1280px) {
+  .container {
+    margin: 0 2rem;
+  }
+}
+
 /* Btn  */
 
 .btn {
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 0.5rem;
   font-size: 1.6rem;
   font-weight: 500;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-primary {

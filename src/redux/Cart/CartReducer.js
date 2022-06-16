@@ -28,7 +28,7 @@ const cartReducer = (state = initialState, action) => {
     case INCREASE: {
       const updatedCart = [...state.cart];
       const findIndex = updatedCart.findIndex(
-        (i) => i.id !== action.payload.id
+        (i) => i.id === action.payload.id
       );
       updatedCart[findIndex].quantity++;
       return { ...state, cart: updatedCart };
@@ -36,7 +36,7 @@ const cartReducer = (state = initialState, action) => {
     case DECREASE: {
       const updatedCart = [...state.cart];
       const findIndex = updatedCart.findIndex(
-        (i) => i.id !== action.payload.id
+        (i) => i.id === action.payload.id
       );
       updatedCart[findIndex].quantity--;
       return { ...state, cart: updatedCart };

@@ -1,4 +1,6 @@
 import React from "react";
+
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 // Icons
@@ -8,7 +10,13 @@ import { BiCart } from "react-icons/bi";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
+  const state = useSelector((state) => state.cartState);
   const navigate = useNavigate();
+
+  const numberOfAmounts = state.cart.reduce(
+    (acc, curr) => acc + curr.quantity,
+    0
+  );
 
   return (
     <header className={styles.header}>
@@ -16,7 +24,7 @@ const Navbar = () => {
         <Link to="/">Products</Link>
         <button>
           <BiCart onClick={() => navigate("/cart")} />
-          <span>10</span>
+          <span>{numberOfAmounts}</span>
         </button>
       </nav>
     </header>

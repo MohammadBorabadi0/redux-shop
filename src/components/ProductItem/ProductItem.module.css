@@ -39,3 +39,12 @@
   font-size: 1.6rem;
   font-weight: 700;
 }
+
+.card__buttons section {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card__buttons button {
+
+}

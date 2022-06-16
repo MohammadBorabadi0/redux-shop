@@ -1,14 +1,25 @@
 import React from "react";
-
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { shorten } from "../../helper/functions";
 
+// Icons
+import { BiPlus, BiMinus } from "react-icons/bi";
+import { BsTrash } from "react-icons/bs";
+// React-Router-Dom
+import { Link } from "react-router-dom";
+// Helper
+import { getQuantity, isInCart, shorten } from "../../helper/functions";
+// Actions
+import {
+  addToCart,
+  decrease,
+  increase,
+  removeFromCart,
+} from "../../redux/Cart/CartActions";
 // Css
 import styles from "./ProductItem.module.css";
 
 const ProductItem = ({ product }) => {
-  const state = useSelector((state) => state.prdouctsState);
+  const state = useSelector((state) => state.cartState);
   const dispatch = useDispatch();
 
   return (
@@ -24,7 +35,39 @@ const ProductItem = ({ product }) => {
         <Link to={`/product/${product.id}`} className="text-secondary">
           Detail
         </Link>
-        <button className="btn btn-primary">Add To Cart</button>
+        <section>
+          {getQuantity(state.cart, product) === 1 && (
+            <button
+              className="btn btn-primary"
+              onClick={() => dispatch(removeFromCart(product))}
+            >
+              <BsTrash />
+            </button>
+          )}
+          {getQuantity(state.cart, product) > 1 && (
+            <button
+              className="btn btn-primary"
+              onClick={() => dispatch(decrease(product))}
+            >
+              <BiMinus />
+            </button>
+          )}
+          {isInCart(state.cart, product) ? (
+            <button
+              className="btn btn-primary"
+              onClick={() => dispatch(increase(product))}
+            >
+              <BiPlus />
+            </button>
+          ) : (
+            <button
+              className="btn btn-primary"
+              onClick={() => dispatch(addToCart(product))}
+            >
+              Add To Cart
+            </button>
+          )}
+        </section>
       </div>
     </section>
   );

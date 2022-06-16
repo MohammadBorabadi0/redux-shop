@@ -59,6 +59,16 @@ html {
   color: var(--white-color);
 }
 
+.btn-danger {
+  background-color: var(--danger-color);
+  color: var(--white-color);
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: var(--white-color);
+}
+
 /* color  */
 
 .text-primary {

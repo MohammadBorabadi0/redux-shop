@@ -12,6 +12,8 @@ import { BsTrash } from "react-icons/bs";
 import styles from "./Cart.module.css";
 import { getQuantity, shorten } from "../../helper/functions";
 import {
+  checkout,
+  clear,
   decrease,
   increase,
   removeFromCart,
@@ -21,13 +23,13 @@ const Cart = () => {
   const state = useSelector((state) => state.cartState);
   const dispatch = useDispatch();
 
-  const numberOfAmounts = state.cart.reduce(
+  let numberOfAmounts = state.cart.reduce(
     (acc, curr) => acc + curr.quantity,
     0
   );
-  // const total = state.cart.reduce(
-  //   (acc, curr) => acc + curr.quantity * curr.price
-  // );
+  let total = state.cart
+    .reduce((acc, curr) => acc + curr.quantity * curr.price, 0)
+    .toFixed(2);
 
   if (!state.cart.length) {
     return (
@@ -48,43 +50,68 @@ const Cart = () => {
       <header className={styles.header}>
         <h2>My Cart</h2>
       </header>
-      <section className={styles.allCart}>
-        {state.cart.map((item) => (
-          <div key={item.id} className={styles.cart}>
-            <div className={styles.cart__header}>
-              <img src={item.image} alt={item.name} />
-            </div>
-            <div className={styles.cart__body}>
-              <h4>{shorten(item.title)}</h4>
-              <span>${item.price}</span>
-            </div>
-            <div className={styles.cart__buttons}>
-              {getQuantity(state.cart, item) === 1 && (
+      <section className={styles.cart__page}>
+        <section className={styles.carts}>
+          {state.cart.map((item) => (
+            <div key={item.id} className={styles.cart}>
+              <div className={styles.cart__header}>
+                <img src={item.image} alt={item.name} />
+              </div>
+              <div className={styles.cart__body}>
+                <h4>{shorten(item.title)}</h4>
+                <span>${item.price}</span>
+              </div>
+              <div className={styles.cart__buttons}>
+                {getQuantity(state.cart, item) === 1 && (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => dispatch(removeFromCart(item))}
+                  >
+                    <BsTrash size="16px" />
+                  </button>
+                )}
+                {getQuantity(state.cart, item) > 1 && (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => dispatch(decrease(item))}
+                  >
+                    <BiMinus />
+                  </button>
+                )}
+                <span>{item.quantity}</span>
                 <button
                   className="btn btn-primary"
-                  onClick={() => dispatch(removeFromCart(item))}
+                  onClick={() => dispatch(increase(item))}
                 >
-                  <BsTrash size="16px" />
+                  <BiPlus />
                 </button>
-              )}
-              {getQuantity(state.cart, item) > 1 && (
-                <button
-                  className="btn btn-primary"
-                  onClick={() => dispatch(decrease(item))}
-                >
-                  <BiMinus />
-                </button>
-              )}
-              <span>{item.quantity}</span>
-              <button
-                className="btn btn-primary"
-                onClick={() => dispatch(increase(item))}
-              >
-                <BiPlus />
-              </button>
+              </div>
             </div>
+          ))}
+        </section>
+        <section className={styles.cart__summary}>
+          <h2>Cart Summary</h2>
+          <p>
+            Total Items : <span>{numberOfAmounts}</span>
+          </p>
+          <p>
+            Total Payments : <span>${total}</span>
+          </p>
+          <div className={styles.cart__summary__buttons}>
+            <button
+              className="btn btn-danger"
+              onClick={() => dispatch(clear())}
+            >
+              Clear
+            </button>
+            <button
+              className="btn btn-success"
+              onClick={() => dispatch(checkout())}
+            >
+              Checkout
+            </button>
           </div>
-        ))}
+        </section>
       </section>
     </main>
   );

@@ -26,4 +26,16 @@
 .card__body span {
   font-size: 1.6rem;
   font-weight: 700;
+  color: var(--primary-color);
+}
+
+.card__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__buttons a {
+  font-size: 1.6rem;
+  font-weight: 700;
 }

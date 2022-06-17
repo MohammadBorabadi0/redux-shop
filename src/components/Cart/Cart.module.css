@@ -64,6 +64,7 @@
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 0.5rem;
+  height: fit-content;
 }
 
 .cart__header img {
